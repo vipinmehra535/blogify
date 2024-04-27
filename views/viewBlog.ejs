@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <title>HomePage</title>
+</head>
+
+<body>
+
+    <%- include('./partials/navbar') %>
+
+        <div class="container mt-4 mb-5">
+            <div class="card border-1 shadow-sm rounded ">
+                <div class="row g-0">
+                    <div class="col-md-5 p-2">
+                        <img src="<%=blog.coverImageURL %>" class="card-img-top rounded" alt="blog" width="1000px"
+                            height="400px">
+                    </div>
+                    <div class="col-md-7 p-2">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%=blog.title %>
+                            </h5>
+                            <p class="card-text">
+                                <%= blog.body %>
+                            </p>
+                            <div class="d-flex justify-content-end">
+                                <img src="<%= blog.createdBy.profileImageUrl %>" width="100px" height="100px" class="rounded-circle"
+                                    alt="user">
+                                <p class="ms-2 mt-2 text-end"><small class="text-muted">by <strong>
+                                            <%= blog.createdBy.fullName %>
+                                        </strong><br>
+                                        <%= new Date(blog.createdAt).toLocaleDateString() %>
+                                    </small></p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <%- include('./partials/script') %>
+
+
+</body>
+
+</html>
