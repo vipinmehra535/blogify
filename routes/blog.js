@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const Blog = require("../models/blog");
+const Comment = require("../models/comments");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -23,23 +24,34 @@ router.get("/add-new", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const blog = await Blog.findById(req.params.id).populate("createdBy");
   console.log(blog);
-  
+  const comments = await Comment.find({ blogId: req.params.id }).populate(
+    "createdBy"
+  );
 
   if (!blog) {
     return res.redirect("/");
   }
-  return res.render("viewBlog", { blog, user: req.user });
+  return res.render("viewBlog", { blog, user: req.user, comments });
+});
+
+router.post("/comment/:blogId", async (req, res) => {
+  const comment = await Comment.create({
+    content: req.body.content,
+    blogId: req.params.blogId,
+    createdBy: req.user._id,
+  });
+
+  return res.redirect("/blog/" + req.params.blogId);
 });
 
 router.post("/", upload.single("coverImage"), async (req, res) => {
   const { title, body } = req.body;
-  const blog = new Blog({
+  const blog = await Blog.create({
     title,
     body,
+    coverImageURL: req.file.filename,
     createdBy: req.user._id,
-    coverImageURL: `/uploads/${req.file.filename}`,
   });
-  await blog.save();
   return res.redirect("/");
 });
 
