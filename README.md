@@ -4,8 +4,12 @@ Are you tired of the same old boring blogging website? Look no further! Blogify 
 
 ## Features
 
-- Modern, responsive design that looks professional and attractive 💻
-- Integration with popular commenting platforms like Disqus 💬
+
+- 📱 Responsive design: Blogify is optimized for all devices, from small phones to large desktops 📱
+- 🔒 User authentication: Blogify supports user registration and login so you can easily manage your blog's content 🔒
+- 📝 Blog creation: You can create as many blogs as you want and customize each one to your liking 📝
+- 🖼 Image uploading: Upload images to go along with your blog posts and have them automatically resized for better performance 🖼
+
 
 
 ## Installation
